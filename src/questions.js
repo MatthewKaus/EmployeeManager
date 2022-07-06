@@ -5,7 +5,7 @@ const mainMenuQuestions = [
         message: 'What would you to do?',
         choices: ['Add Intern', 'Add Manager', 'Add Engineer', 'Finished']
     }
-]
+];
 
 const internQuestions = [
     {
