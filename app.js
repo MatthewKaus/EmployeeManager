@@ -1,15 +1,13 @@
-const inquire = require('inquirer');
-const fs = require('fs')
-const { mainMenuQuestions, internQuestions, managerQuestions, engineerQuestions } = require('./src/questions');
+const inquirer = require('inquirer');
+const { writeFile, copyFile } = require('./utils/generator.js')
 
-const Intern = require('./lib/Intern.js')
-const Manager = require('./lib/Manager.js')
-const Engineer = require('./lib/Engineer.js');
+const { mainMenuQuestions, internQuestions, managerQuestions, engineerQuestions } = require('./src/questions');
+const { Intern, Manager, Engineer } = require('./lib/index.js')
 
 const employeeArray = []
 
 const mainMenu = () => {
-    inquire.prompt(mainMenuQuestions).then(answers => {
+    inquirer.prompt(mainMenuQuestions).then(answers => {
         switch (answers.menu) {
             case 'Add Intern': addIntern(); break;
             case 'Add Manager': addManager(); break;
@@ -20,7 +18,7 @@ const mainMenu = () => {
 };
 
 const addIntern = () => {
-    inquire.prompt(internQuestions).then(answers => {
+    inquirer.prompt(internQuestions).then(answers => {
         const intern = new Intern(answers.intern, answers.id, answers.email, answers.school)
         employeeArray.push(intern)
         mainMenu();
@@ -28,7 +26,7 @@ const addIntern = () => {
 }
 
 const addEngineer = () => {
-    inquire.prompt(engineerQuestions).then(answers => {
+    inquirer.prompt(engineerQuestions).then(answers => {
         const engineer = new Engineer(answers.engineer, answers.id, answers.email, answers.github)
         employeeArray.push(engineer)
         mainMenu();
@@ -36,7 +34,7 @@ const addEngineer = () => {
 };
 
 const addManager = () => {
-    inquire.prompt(managerQuestions).then(answers => {
+    inquirer.prompt(managerQuestions).then(answers => {
         const manager = new Manager(answers.manager, answers.id, answers.email, answers.office)
         employeeArray.push(manager)
         mainMenu();
